@@ -1,5 +1,12 @@
 <div class="calendar-events-wrapper">
-  <div class="hours" *ngFor="let hour of 24">
-    {{hour}}
-  </div>
+  <ul>
+    <li class="hours" *ngFor="let item of hoursData" (click)="openDialog($event, item)">
+      <div class="hour-event" class="w-100" [style]="{background: item.background}">
+        {{item.hour}}
+        <h4 *ngIf="item.events.name">
+          {{item.events.name}}, {{item.events.location}}
+        </h4>
+      </div>
+    </li>
+  </ul>
 </div>

@@ -1,0 +1,15 @@
+.calendar-events-wrapper {
+  ul {
+    li {
+      cursor: pointer;
+      border: 1px solid #989595;
+      height: 100px;
+
+      .hour-event {
+        h4 {
+          //color: #fff;
+        }
+      }
+    }
+  }
+}
