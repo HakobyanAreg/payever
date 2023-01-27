@@ -1,0 +1,35 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav mode="side" #sidenav position="start" class="w-40">
+    <app-calendar></app-calendar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="basic">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+
+      <!--      <span class="spacer"></span>-->
+      <mat-icon>calendar_month</mat-icon>
+      <span class="spacer"></span>
+      <button mat-raised-button
+              matTooltip="Today"
+              matTooltipPosition="right"
+              aria-label="Button that displays a tooltip when focused or hovered over">
+        Today
+      </button>
+      <span class="spacer"></span>
+      <button mat-icon-button class="icon navigate_before-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <button mat-icon-button class="icon favorite_next-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <div class="current-date">
+        <h2>{{currentDate}}</h2>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
