@@ -5,7 +5,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {AppCalendarEventsDialogComponent} from "./calendar-events-dialog/calendar-events-dialog.component";
 import {CalendarEventsService} from "../../services/calendar-events.service";
 import {StorageService} from "../../services/storage.service";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-calendar-events',
@@ -39,12 +38,21 @@ export class AppCalendarEventsComponent implements OnInit{
 
 
   public openDialog(e: Event, item: HoursData): void {
+    if (item.events.name && item.events.location) {
+      return
+    }
+
     const dialogRef = this.dialog.open(AppCalendarEventsDialogComponent);
     item.background = 'rgb(3, 155, 229)'
 
     dialogRef.afterClosed().subscribe(result => {
-      item.events.name = result.eventName;
-      item.events.location = result.eventLocation;
+      if (!result.eventName && !result.eventLocation && !item.events.name && !item.events.location) {
+        item.background = 'transparent'
+        return
+      }
+
+      item.events.name = result.eventName || item.events.name;
+      item.events.location = result.eventLocation || item.events.location;
       this._storageService.setItem(`${this.currentDate} ${item.hour}`, JSON.stringify({name: item.events.name, hour: item.hour, location: item.events.location}))
     });
   }
